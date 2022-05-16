@@ -8,7 +8,9 @@ public class Calc extends JFrame {
     private double op1=0;
     private double op2=0;
     private String operator="+";
+    private JLabel status;
     public Calc(){
+        JLabel status=new JLabel("버튼을 클릭하세요");
         this.setTitle("계산기");
         this.setBounds(100,100,400,500);
         this.setLayout(new BorderLayout());
@@ -43,16 +45,32 @@ public class Calc extends JFrame {
             op1=Double.parseDouble(display.getText());
             display.setText("0");
             operator = "+";
+            status.setText(op1+"+");
         });
-
        panel.add(btnPlus);
+
+        JButton btnDot = new JButton(".");
+        btnDot.addActionListener(e->{
+            if(!display.getText().contains(".")){
+                display.setText(display.getText()+btnDot.getText());
+            }
+        });
+        panel.add(btnDot);
+
+        JButton btnClear = new JButton("C");
+        btnClear.addActionListener(e->{
+            op1=0;
+            op2=0;
+            operator="+";
+            display.setText("0");
+            status.setText(" ");
+        });
+        panel.add(btnClear);
+
 
 
         this.add(BorderLayout.CENTER,panel);
-        //this.add(panel);
 
-
-        JLabel status=new JLabel("버튼을 클릭하세요");
         this.add(BorderLayout.SOUTH,status);
     }
 
