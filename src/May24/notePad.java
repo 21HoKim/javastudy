@@ -1,6 +1,8 @@
 package May24;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileReader;
 
 public class notePad extends JFrame {
     notePad(){
@@ -30,6 +32,11 @@ public class notePad extends JFrame {
 
     private void doOpen() {
         System.out.println("열기 메뉴 선택");
+        File file = new File("test_2.txt");
+        May30.FileIO.readCharFile(file);
+
+
+
     }
 
     public static void main(String[] args) {
