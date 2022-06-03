@@ -9,6 +9,11 @@ public class Calc extends JFrame {
     private double op2=0;
     private String operator="+";
     private JLabel status;
+    private String[] btnText = {
+            "7","8","9",
+            "4","5","6",
+            "1","2","3","0"
+    };
     public Calc(){
         JLabel status=new JLabel("버튼을 클릭하세요");
         this.setTitle("계산기");
@@ -21,9 +26,31 @@ public class Calc extends JFrame {
         this.add(BorderLayout.NORTH,display);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4,4));
+        panel.setLayout(new GridLayout(5,4));
+        JButton btnPlus = new JButton("+");
+        JButton btnMinus = new JButton("-");
+        JButton btnMulti = new JButton("*");
+        JButton btnDivision = new JButton("/");
+        //JButton btnPM=new JButton("+/-");
+        JButton btnDot=new JButton(".");
         for(int i=0;i<10;i++){
-            JButton btn = new JButton(""+i);
+            JButton btn = new JButton(btnText[i]);
+            panel.add(btn);
+            if(i==2){
+                panel.add(btnMulti);
+            }
+            if(i==5){
+                panel.add(btnMinus);
+            }
+            if(i==8){
+                panel.add(btnPlus);
+            }
+            if(i==8){
+                panel.add(btnDivision);
+            }
+            if(i==9){
+                panel.add(btnDot);
+            }
             btn.addActionListener(e->{
                 if(display.getText().equals("0")){ //참조연산 비교는 equals 사용
                     display.setText(btn.getText());
@@ -31,8 +58,9 @@ public class Calc extends JFrame {
                     display.setText(display.getText() + btn.getText());
                 }
             });
-            panel.add(btn);
+
         }
+
         JButton btnEqual = new JButton("=");
         btnEqual.addActionListener(e->{
             op2=Double.parseDouble(display.getText());
@@ -40,22 +68,25 @@ public class Calc extends JFrame {
             display.setText(""+result);
         });
         panel.add(btnEqual);
-        JButton btnPlus = new JButton("+");
+
+
         btnPlus.addActionListener(e->{
             op1=Double.parseDouble(display.getText());
             display.setText("0");
             operator = "+";
             status.setText(op1+"+");
         });
-       panel.add(btnPlus);
+       //panel.add(btnPlus);
 
-        JButton btnDot = new JButton(".");
+
         btnDot.addActionListener(e->{
             if(!display.getText().contains(".")){
                 display.setText(display.getText()+btnDot.getText());
             }
         });
-        panel.add(btnDot);
+
+        btnDivision.addActionListener(e->{});
+        //panel.add(btnDot);
 
         JButton btnClear = new JButton("C");
         btnClear.addActionListener(e->{
